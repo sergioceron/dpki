@@ -1,0 +1,50 @@
+version: '3'
+
+services:
+  ethereum:
+    build:
+      dockerfile: Dockerfile.ethereum
+      context: .
+      args:
+        PRIVATE_KEY: 8f2a55949038a9610f50fb23b5883af3b4ecb3c3bb792cbcefbd1542c692be63
+        PUBLIC_KEY: 09b02f8a5fddd222ade4ea4528faefc399623af3f736be3c44f03e2df22fb792f3931a4d9573d333ca74343305762a753388c3422a86d98b713fc91c1ea04842
+    environment:
+      SUBJECT: /C=MX/ST=DF/L=TL/O=IADB/OU=Lab/CN=localhost
+    volumes:
+      - ./out:/out
+
+  ethereum_auto:
+    build:
+      dockerfile: Dockerfile.ethereum_auto
+      context: .
+    environment:
+      SUBJECT: /C=MX/ST=DF/L=TL/O=Prueba1/OU=IT/CN=localhost
+    volumes:
+      - ./out:/out
+
+  quantum:
+    build:
+      dockerfile: Dockerfile.quantum
+      context: .
+    environment:
+      SUBJECT: /C=MX/ST=DF/L=TL/O=Prueba1/OU=IT/CN=localhost
+    volumes:
+      - ./out:/out
+
+  idemia:
+    build:
+      dockerfile: Dockerfile.idemia
+      context: .
+    volumes:
+      - ./out:/out
+      - ./idemia.key:/root_ca.key
+      - ./idemia.crt:/root_ca.crt
+
+  fake_idemia:
+    build:
+      dockerfile: Dockerfile.idemia
+      context: .
+    volumes:
+      - ./out:/out
+      - ./fake_idemia.key:/root_ca.key
+      - ./fake_idemia.crt:/root_ca.crt
