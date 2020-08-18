@@ -40,6 +40,16 @@ services:
       - ./idemia.key:/root_ca.key
       - ./idemia.crt:/root_ca.crt
 
+  idemia_full:
+    build:
+      dockerfile: Dockerfile.idemia_full
+      context: .
+    volumes:
+      - ./out:/out
+      - ./main.crt:/main.crt
+      - ./idemia.key:/root_ca.key
+      - ./idemia.crt:/root_ca.crt
+
   fake_idemia:
     build:
       dockerfile: Dockerfile.idemia
