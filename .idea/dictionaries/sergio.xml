@@ -2,7 +2,11 @@
   <dictionary name="sergio">
     <words>
       <w>ethereum</w>
+      <w>ethr</w>
+      <w>ethutils</w>
+      <w>lacchain</w>
       <w>priv</w>
+      <w>secp</w>
     </words>
   </dictionary>
 </component>

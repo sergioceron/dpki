@@ -31,18 +31,18 @@ services:
     volumes:
       - ./out:/out
 
-  idemia:
+  generator:
     build:
-      dockerfile: Dockerfile.idemia
+      dockerfile: Dockerfile.generator
       context: .
     volumes:
       - ./out:/out
       - ./idemia.key:/root_ca.key
       - ./idemia.crt:/root_ca.crt
 
-  idemia_full:
+  generator_validation:
     build:
-      dockerfile: Dockerfile.idemia_full
+      dockerfile: Dockerfile.generator_validation
       context: .
     volumes:
       - ./out:/out
@@ -50,11 +50,23 @@ services:
       - ./idemia.key:/root_ca.key
       - ./idemia.crt:/root_ca.crt
 
-  fake_idemia:
+  fake_generator:
     build:
-      dockerfile: Dockerfile.idemia
+      dockerfile: Dockerfile.generator
       context: .
     volumes:
       - ./out:/out
       - ./fake_idemia.key:/root_ca.key
       - ./fake_idemia.crt:/root_ca.crt
+
+  did:
+    build:
+      dockerfile: Dockerfile.did
+      context: .
+    volumes:
+      - ./out/certificate.crt:/app/certificate.crt
+    environment:
+      ETHR_REGISTRY: "0xd6A7c915066E17ba18024c799258C8A286fFBc00"
+      WEB3_RPC: http://35.184.61.29:4545
+      CERTIFICATE: certificate.crt
+      NETWORK_ID: 648539
